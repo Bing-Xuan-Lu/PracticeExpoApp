@@ -10,9 +10,16 @@ const AuthContext = createContext();
 
 const AuthState = (props) => {
   const [isLogin, setIslogin] = useState(false);
-
+  const [userInfo, setuserInfo] = useState({});
   useEffect(() => {
     CheckAlReadyLogin().then((res) => {
+      if (res) {
+        GetUserInfo().then((loginInfo) => {
+          setuserInfo(loginInfo);
+        });
+      } else {
+        setuserInfo({});
+      }
       setIslogin(res);
     });
   }, [isLogin]);
@@ -39,6 +46,7 @@ const AuthState = (props) => {
         onAuthentication,
         isLogin,
         onLogOut,
+        userInfo,
       }}
     >
       {props.children}

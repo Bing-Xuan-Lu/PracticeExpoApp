@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "../Context/AuthState";
 import LoginScreen from "../src/Home/LoginScreen";
 import IndexScreen from "../src/Home/IndexScreen";
+import IndexNavigator from "../Navigation/IndexNavigator"
 
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
@@ -20,7 +21,7 @@ export default function AppNavigator() {
         {isLogin ? (
           <RootStack.Screen
             name="Index"
-            component={IndexScreen}
+            component={IndexNavigator}
             options={{ title: "首頁" }}
           />
         ) : (

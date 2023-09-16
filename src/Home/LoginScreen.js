@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import {
   TouchableOpacity,
   TextInput,
@@ -9,11 +10,27 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
+import { AuthContext } from "../../Context/AuthState";
 
 export default function LoginScreen({ navigation }) {
+  const { onAuthentication } = useContext(AuthContext);
+  let UserObject = {
+    Account: "",
+    Password: "",
+    IsRemberMe: true,
+  };
+  const [loginInfo, setloginInfo] = useState(UserObject);
   function onLogin() {
-    Alert.alert("訊息","登入成功!");
-    navigation.navigate("Index");
+    if (loginInfo.Account === "" || loginInfo.Password === "") {
+      Alert.alert("失敗", "請輸入使用者資訊");
+      return false;
+    } else {
+      loginInfo.Password = "";
+      onAuthentication(loginInfo).then(() => {
+        Alert.alert("訊息", "登入成功!");
+        navigation.navigate("Index");
+      });
+    }
   }
   return (
     <ScrollView className="flex-1" style={styles.container}>
@@ -29,7 +46,11 @@ export default function LoginScreen({ navigation }) {
         </Text>
         <View className="my-3 w-10/12">
           <TextInput
+            value={loginInfo.Account}
             placeholder={"帳號"}
+            onChangeText={(Account) =>
+              setloginInfo({ ...loginInfo, Account: Account })
+            }
             className="px-3 py-2 border border-blue-300 rounded-md bg-blue-50"
           />
         </View>
@@ -37,11 +58,20 @@ export default function LoginScreen({ navigation }) {
           <TextInput
             placeholder={"密碼"}
             secureTextEntry={true}
+            value={loginInfo.Password}
+            onChangeText={(password) =>
+              setloginInfo({ ...loginInfo, Password: password })
+            }
             className="px-3 py-2 border border-blue-300 rounded-md bg-blue-50"
           />
         </View>
         <View className="flex-row my-5">
-          <Switch value={true} />
+          <Switch
+            value={loginInfo.IsRemberMe}
+            onValueChange={(IsRemberMe) =>
+              setloginInfo({ ...loginInfo, IsRemberMe: IsRemberMe })
+            }
+          />
           <Text className="pt-3 pl-5">記住登入資訊</Text>
         </View>
         <TouchableOpacity
