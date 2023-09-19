@@ -4,12 +4,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "../Context/AuthState";
 import LoginScreen from "../src/Home/LoginScreen";
 import IndexScreen from "../src/Home/IndexScreen";
-import IndexNavigator from "../Navigation/IndexNavigator"
+import IndexNavigator from "../Navigation/IndexNavigator";
 
 export default function AppNavigator() {
   const RootStack = createStackNavigator();
   const { isLogin } = useContext(AuthContext);
-
+  console.log(isLogin);
   return (
     <NavigationContainer>
       <RootStack.Navigator

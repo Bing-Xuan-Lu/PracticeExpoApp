@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 //保存使用者資訊
 async function StoreUserInfo(user) {
   try {
@@ -35,17 +34,8 @@ async function CheckAlReadyLogin() {
 }
 
 //清除使用者資訊
-function ClearUserInfo(IsRemberMe) {
-  if(IsRemberMe){
-    AsyncStorage.removeItem('userData')
-  }else{
-    AsyncStorage.clear();
-  }   
+function ClearUserInfo() {
+  AsyncStorage.clear();
 }
 
-export {
-  StoreUserInfo,
-  CheckAlReadyLogin,
-  GetUserInfo,
-  ClearUserInfo,
-};
+export { StoreUserInfo, CheckAlReadyLogin, GetUserInfo, ClearUserInfo };

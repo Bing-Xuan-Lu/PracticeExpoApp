@@ -15,14 +15,15 @@ const AuthState = (props) => {
     CheckAlReadyLogin().then((res) => {
       if (res) {
         GetUserInfo().then((loginInfo) => {
-          setuserInfo(loginInfo);
+          setuserInfo(loginInfo); //重開APP時從AsyncStorage將使用者資訊帶回去
+          //如果你一開始記住登入資訊是取消的，下次登入進來要回登入畫面重打
+          setIslogin(loginInfo.IsRemberMe);
         });
       } else {
-        setuserInfo({});
+        setIslogin(false);
       }
-      setIslogin(res);
     });
-  }, [isLogin]);
+  }, []);
 
   const onAuthentication = async (loginInfo) => {
     StoreUserInfo(loginInfo);
@@ -32,7 +33,7 @@ const AuthState = (props) => {
   const onLogOut = () => {
     GetUserInfo()
       .then((loginInfo) => {
-        ClearUserInfo(loginInfo.IsRemberMe);
+        ClearUserInfo();
         setIslogin(false);
       })
       .catch((e) => {

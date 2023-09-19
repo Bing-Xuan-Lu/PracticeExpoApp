@@ -12,24 +12,34 @@
     "@expo/ngrok": "4.1.0",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-native-community/datetimepicker": "7.2.0",
+    "@react-native-picker/picker": "2.4.10",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/material-top-tabs": "^6.6.3",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
     "expo": "~49.0.8",
+    "expo-barcode-scanner": "~12.5.3",
     "expo-status-bar": "~1.6.0",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.72.4",
+    "react-native-barcode-mask": "^1.2.4",
+    "react-native-pager-view": "6.2.0",
+    "react-native-picker-select": "^8.1.0",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-tab-view": "^3.5.2",
-    "tailwindcss": "^3.3.2",
-    "react-native-pager-view": "6.2.0",
-    "react-native-webview": "13.2.2"
+    "react-native-webview": "13.2.2",
+    "tailwindcss": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
+  },
+  "overrides": {
+    "react-native-picker-select": {
+      "@react-native-picker/picker": "$@react-native-picker/picker"
+    }
   },
   "private": true
 }
