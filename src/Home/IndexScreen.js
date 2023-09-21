@@ -12,6 +12,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useIsFocused } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import BarcodeMask from "react-native-barcode-mask";
+import { GPSLocation, GPSTrackLocation } from "../../Common/GPSLocation";
 
 export default function IndexScreen({ navigation }) {
   const IndexStack = createStackNavigator();
@@ -26,6 +27,11 @@ export default function IndexScreen({ navigation }) {
         name="QRCode"
         component={QRCodeView}
         options={{ title: "QR Code掃描" }}
+      />
+      <IndexStack.Screen
+        name="GPS"
+        component={GPSView}
+        options={{ title: "GPS位置追蹤" }}
       />
     </IndexStack.Navigator>
   );
@@ -43,6 +49,43 @@ function IndexView({ navigation }) {
       >
         <Text className="text-white text-xl m-3 text-center">QRCode功能</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        className="bg-yellow-600 rounded-lg w-10/12 m-3"
+        onPress={() => navigation.navigate("GPS")}
+      >
+        <Text className="text-white text-xl m-3 text-center">GPS定位功能</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function GPSView() {
+  const [gpsresult, setgpsresult] = useState();
+  return (
+    <View>
+      <Text>{gpsresult}</Text>
+      <TouchableOpacity
+        className="bg-sky-600 rounded-lg w-10/12 m-3"
+        onPress={() => navigation.navigate("GPS")}
+      >
+        <Text className="text-white text-xl m-3 text-center">取得現在位置</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="bg-green-600 rounded-lg w-10/12 m-3"
+        onPress={() => GPSTrackLocation().StartLocationTracking()}
+      >
+        <Text className="text-white text-xl m-3 text-center">
+          開始記錄背景位置
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="bg-red-600 rounded-lg w-10/12 m-3"
+        onPress={() => GPSTrackLocation().StopLocationTracking()}
+      >
+        <Text className="text-white text-xl m-3 text-center">
+          停止記錄背景位置
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -55,7 +98,7 @@ function QRCodeView({ navigation, route }) {
   const finderWidth = 280;
   const finderHeight = 230;
   const width = Dimensions.get("window").width;
-  const height = Dimensions.get("window").height - 130;//依照上方選單列微調
+  const height = Dimensions.get("window").height - 130; //依照上方選單列微調
   const viewMinX = (width - finderWidth) / 2;
   const viewMinY = (height - finderHeight) / 2;
 
@@ -78,7 +121,6 @@ function QRCodeView({ navigation, route }) {
       x <= viewMinX + finderWidth / 2 &&
       y <= viewMinY + finderHeight / 2
     ) {
-      
       setScanned(true);
       if (type.indexOf("QRCode") < 0) {
         //驗證QRCode類型

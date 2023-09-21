@@ -13,6 +13,9 @@ import WebView from "react-native-webview";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { Entypo } from "@expo/vector-icons";
 import RNPickerSelect from "react-native-picker-select";
+import UserLocation from "./UserLocation";
+import * as TaskManager from "expo-task-manager";
+import { GPSLocation, GPSTrackLocation } from "./Common/GPSLocation";
 
 export default function App() {
   const items = [
@@ -21,7 +24,7 @@ export default function App() {
     { label: "選項3", value: "option3" },
   ];
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1" style={styles.container}>
       <StatusBar style="auto" />
       {/* <View className="mt-5">
         <RNPickerSelect
@@ -37,9 +40,10 @@ export default function App() {
           onValueChange={(value) => console.log(value)}
         />
       </View> */}
-      <AuditState>
+      {/* <AuditState>
         <AppNavigator />
-      </AuditState>
+      </AuditState> */}
+      <UserLocation></UserLocation>
     </SafeAreaView>
   );
 }
