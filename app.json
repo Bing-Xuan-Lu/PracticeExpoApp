@@ -17,12 +17,16 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"],
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ],
         "NSLocationUsageDescription": "啟用定位服務 才能使用定位功能",
         "NSLocationAlwaysAndWhenInUseUsageDescription": "啟用定位服務 才能使用定位功能",
         "NSLocationWhenInUseUsageDescription": "啟用定位服務 才能使用定位功能",
         "NSLocationAlwaysUsageDescription": "啟用定位服務 才能使用定位功能"
-      }
+      },
+      "bundleIdentifier": "com.Practice.expoapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +35,11 @@
       },
       "package": "com.Practice.expoapp",
       "versionCode": 1,
-      "permissions":["ACCESS_COARSE_LOCATION","ACCESS_FINE_LOCATION","ACCESS_BACKGROUND_LOCATION"]
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
