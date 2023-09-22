@@ -23,6 +23,7 @@ export default function App() {
     { label: "選項2", value: "option2" },
     { label: "選項3", value: "option3" },
   ];
+  const appversion = process.env.EXPO_PUBLIC_APP_VERSION;
   return (
     <SafeAreaView className="flex-1" style={styles.container}>
       <StatusBar style="auto" />
@@ -40,10 +41,9 @@ export default function App() {
           onValueChange={(value) => console.log(value)}
         />
       </View> */}
-      {/* <AuditState>
+      <AuditState>
         <AppNavigator />
-      </AuditState> */}
-      <UserLocation></UserLocation>
+      </AuditState>
     </SafeAreaView>
   );
 }
